@@ -1,3 +1,16 @@
+"use client"
+import FullCalendar from "@fullcalendar/react"
+import { Calendar } from '@fullcalendar/core'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import multiMonthPlugin from "@fullcalendar/multimonth"
+
+
+
 export default function Home() {
-  return <main className="center">Esto es el Main</main>;
+  return (
+    <FullCalendar
+      plugins={[ multiMonthPlugin ]}
+      initialView="multiMonthYear"
+    />
+  )
 }
