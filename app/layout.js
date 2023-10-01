@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
       <body>
         {/* Envolvemos todo nuestro contenido */}
         <Providers>
-          <Header />
           {children}
         </Providers>
       </body>
