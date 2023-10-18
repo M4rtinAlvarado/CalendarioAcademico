@@ -9,13 +9,20 @@ export default function Home() {
   return (
     <div className="main">
       <h1>CALENDARIO UACH 2023</h1>
+
+      
       <div className="contenedor">
+      <div className= "aa">
+      <h1>CALENDARIO UACH 2023</h1>
+      </div>
+      <div>
+
       
       <FullCalendar 
         eventBackgroundColor=""
         headerToolbar = "false"
         aspectRatio={1.5}
-        height={635}
+        height={200}
         multiMonthMinWidth={500}
         plugins={[ multiMonthPlugin ]}
         initialView="multiMonthYear"
@@ -27,6 +34,7 @@ export default function Home() {
           {title:"b", start: '2023-10-15', end: '2023-10-17', backgroundColor: "blue"},
         ]}
       />
+      </div>
       </div>
     </div>
   )
