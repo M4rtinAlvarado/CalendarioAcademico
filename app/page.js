@@ -8,7 +8,6 @@ import multiMonthPlugin from "@fullcalendar/multimonth"
 export default function Home() {
   return (
     <div className="main">
-      <h1>CALENDARIO UACH 2023</h1>
       <div className="contenedor">
       
       <FullCalendar 
