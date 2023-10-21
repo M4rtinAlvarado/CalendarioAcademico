@@ -1,5 +1,6 @@
 "use client"
 import FullCalendar from "@fullcalendar/react"
+import Link from 'next/link'
 import interactionPlugin from '@fullcalendar/interaction';
 import multiMonthPlugin from "@fullcalendar/multimonth"
 
@@ -7,15 +8,15 @@ import multiMonthPlugin from "@fullcalendar/multimonth"
 
 export default function Home() {
   return (
-    <div className="main">
-      <h1>CALENDARIO UACH 2023</h1>
-      <div className="contenedor">
+    <div className="main-home">
+      <h1 className="home-titulo">CALENDARIO UACH 2023</h1>
       
+      <div className="contenedor-calendario">
       <FullCalendar 
         eventBackgroundColor=""
         headerToolbar = "false"
-        aspectRatio={2.77}
-        height={610}
+        aspectRatio={1.49}
+        height={635}
         multiMonthMinWidth={500}
         plugins={[ multiMonthPlugin ]}
         initialView="multiMonthYear"
