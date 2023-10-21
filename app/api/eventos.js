@@ -430,7 +430,7 @@ export const events =
         type: "academico",
         sem: "Semestre1",
         start: "2023-04-17",
-        sede: ["Patagonia"]//Coyhaique es patagonia?
+        sede: ["Patagonia"]
       },
       {
         description: "Inauguración del Año academico en Puerto Montt.",
