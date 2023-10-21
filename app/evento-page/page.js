@@ -1,17 +1,12 @@
 "use client"
 import { Input } from '@chakra-ui/react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
-import {League_Spartan} from "@next/font/google"
 
-const lspartan = League_Spartan({
-    subsets:['latin']
-})
 
 export default function Home() {
   return (
-    <div className={lspartan.className}>
         <div className="main-evento">
-            <h1 >Nombre de Evento</h1>
+            <h1 className='title-evento'>Nombre de Evento</h1>
 
             <div className="div-default">
                 <div className="fecha">
@@ -41,6 +36,6 @@ export default function Home() {
 
 
         </div>
-    </div>
+
   )
 }
