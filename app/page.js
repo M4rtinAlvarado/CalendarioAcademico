@@ -24,7 +24,7 @@ export default function Home() {
         locale = "esLocale"
         multiMonthMaxColumns = "1"
         events = {[
-          {title:"a", start: '2023-10-13', className: "a"},
+          {title:"a", start: '2023-10-13', className: ["Financiero","Valdivia"]},
           {title:"b", start: '2023-10-15', end: '2023-10-17', backgroundColor: "blue"},
         ]}
       />
