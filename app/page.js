@@ -1,7 +1,9 @@
 "use client"
+import { useState } from 'react';
 import FullCalendar from "@fullcalendar/react"
-import interactionPlugin from '@fullcalendar/interaction';
-import multiMonthPlugin from "@fullcalendar/multimonth"
+import multiMonthPlugin from "@fullcalendar/multimonth";
+import eventos, { events } from './api/eventos';
+
 
 
 function selectButton(selectedFilters, selectedCategory,events){
@@ -25,6 +27,23 @@ function EventsAct(selectedFilters,events ) {
   return ; }
 
 export default function Home() {
+  const allCategories = [
+		'All',
+		...new Set(events.map(evento => evento.type)),
+	];
+
+	const [categories, setCategories] = useState(allCategories);
+	const [articles, setArticles] = useState(eventos);
+
+	const filterCategory = (category) => {
+		if (category === 'All'){
+			setArticles(data)
+			return
+		}
+
+		const filteredData = data.filter(article => article.category === category);
+		setArticles(filteredData)
+	}
   return (
     <div className="main">
       <div className="contenedor">
@@ -44,6 +63,10 @@ export default function Home() {
           {title:"b", start: '2023-10-15', end: '2023-10-17', backgroundColor: "blue"},
         ]}
       />
+
+      </div>
+      <div>
+        {categories}
       </div>
       </div>
   )
