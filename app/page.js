@@ -1,26 +1,38 @@
 "use client"
-import {  useEffect, useState } from 'react';
 import FullCalendar from "@fullcalendar/react"
+import {  useEffect, useState } from 'react';
+import multiMonthPlugin from "@fullcalendar/multimonth"
+import dayGridPlugin from '@fullcalendar/daygrid'
 import { Stack, HStack, VStack } from '@chakra-ui/react';
 import { Button, ButtonGroup } from '@chakra-ui/react';
-import multiMonthPlugin from "@fullcalendar/multimonth";
 import { allCampus, typevents, events} from './api/eventos';
 
+function buildToolbar() {
+  return {
+    left: 'prev,next',
+    center: 'title',
+    right: 'dayGridMonth multiMonthYear'
+  }
+}
 
-
-
+function buildValidRange() {
+  return {
+    start:'2023-01-01',
+    end: '2024-01-01'
+  }
+}
 
 export default function Home() {
 
-	const [selectedFilters, setSelectedFilters] = useState([]);
-	const [eventos, setEvents] = useState(events);
+	const [selectedFilters, setSelectedFilters] = useState([])
+	const [eventos, setEventos] = useState(events);
 
   const handleFilterButtonClick = (selectedCategory) => {
     if (selectedFilters.includes(selectedCategory)) {
-      let filters = selectedFilters.filter((a) => a !== selectedCategory);
-      setSelectedFilters(filters);
+      let filters = selectedFilters.filter((a) => a !== selectedCategory)
+      setSelectedFilters(filters)
     } else {
-      setSelectedFilters([...selectedFilters, selectedCategory]);
+      setSelectedFilters([...selectedFilters, selectedCategory])
     }
   };
 
@@ -30,51 +42,51 @@ export default function Home() {
 
   const filterItems = () => {
     if (selectedFilters.length > 0) {
-      for(let i = 0; i<selectedFilters.length; i++ ){
-        for(let j = 0; j<eventos.length; j++){
-          if(selectedFilters[i] === eventos[j].type){
-          ;}
+        const items = []
+        for(let j = 0; j < events.length; j++){
+          if(selectedFilters.includes(events[j].className)){
+            items.push(events[j])
         }
-      }
-      setEvents(items);
-    } else {
-      setEvents(events);
+      
     }
     console.log(selectedFilters)
-  };
+    console.log(items)
+    setEventos(items)
+  } else {
+      setEventos(events)
+    }}
+  
   return (
-    <div className="main">
-      <h1>CALENDARIO UACH 2023</h1>
-      <div className="contenedor">
+    <div className="main-home">
+    <div className="contenedor-filtros">
+      <h1 className="title-filtros">Filtros</h1>
       <Stack spacing={2} align='center'>
         {typevents.map((category) => (
+          <Button onClick={() => handleFilterButtonClick(category)} className={category}>
+            {category}
+          </Button>
+        ))}
+        {allCampus.map((category) => (
           <Button onClick={() => handleFilterButtonClick(category)}>
             {category}
           </Button>
         ))}
       </Stack>
-      <Stack spacing={2} align='center'>
-        {allCampus.map((campus) => (
-          <Button>
-            {campus}
-          </Button>
-        ))}
-      </Stack>
-      <FullCalendar 
-        eventBackgroundColor=""
-        headerToolbar = "false"
-        aspectRatio={1.5}
-        height={635}
-        multiMonthMinWidth={500}
-        plugins={[ multiMonthPlugin ]}
+    </div>
+    <div className="contenedor-calendario">
+      <FullCalendar
+        headerToolbar = {buildToolbar()}
+        validRange={buildValidRange()}
+        aspectRatio={1.3}
+        height={660}
+        plugins={[ multiMonthPlugin, dayGridPlugin ]}
         initialView="multiMonthYear"
         firstDay={1}
+        handleWindowResize='true'
         locale = "esLocale"
-        multiMonthMaxColumns = "1"
         events = {eventos}
       />
-      </div>
-      
-      </div>
-  )
+    </div>
+  </div>
+)
 }
