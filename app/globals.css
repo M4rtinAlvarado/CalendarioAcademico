@@ -3,7 +3,7 @@ header{
     flex-direction: row;
     padding: 1%;
     text-align: left;
-    background-color: cornflowerblue;
+    background-color: #003554;
     color: white;
     font-weight: 500;
     margin-bottom: 1%;
@@ -18,17 +18,37 @@ header{
     font-size: 2rem;
 }
 
+.title-filtros{
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 5%;
+}
+
 h3{
     font-size: 1.5rem;
 }
 
 .contenedor-calendario{
-    padding-left: 20%;
-    padding-right: 1%;
+    width: 100%;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+.contenedor-filtros{
+    height: auto;
+    padding: 2%;
+    border-radius: 1rem;
+    width: 20%;
+    margin-left: 2%;
+    margin-bottom: 1%;
+    background-color: #6096ba;
 }
 
 .main-home{
-    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .main-evento{
@@ -99,17 +119,17 @@ h3{
 }
 
 .Financiero{
-    background-color: rgb(76, 206, 206);
+    background-color: rgb(67, 170, 139);
 }
 
 .Académico{
-    background-color: rgb(97, 214, 97);
+    background-color: rgb(249, 199, 79);
 }
 
 .Social{
-    background-color: rgb(216, 75, 75);
+    background-color: rgb(249, 65, 68);
 }
 
 .Otros{
-    background-color: blueviolet;
+    background-color: rgb(39, 125, 161);
 }
