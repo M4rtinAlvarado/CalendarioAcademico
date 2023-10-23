@@ -1,35 +1,65 @@
 "use client"
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
 import FullCalendar from "@fullcalendar/react"
+import { Stack, HStack, VStack } from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
 import multiMonthPlugin from "@fullcalendar/multimonth";
-import eventos, { events } from './api/eventos';
+import { allCampus, typevents, events} from './api/eventos';
+
 
 
 
 
 export default function Home() {
-  const allCategories = [
-		'All',
-		...new Set(events.map(evento => evento.type)),
-	];
 
-	const [categories, setCategories] = useState(allCategories);
-	const [articles, setArticles] = useState(eventos);
+	const [selectedFilters, setSelectedFilters] = useState([]);
+	const [eventos, setEvents] = useState(events);
 
-	const filterCategory = (category) => {
-		if (category === 'All'){
-			setArticles(data)
-			return
-		}
+  const handleFilterButtonClick = (selectedCategory) => {
+    if (selectedFilters.includes(selectedCategory)) {
+      let filters = selectedFilters.filter((a) => a !== selectedCategory);
+      setSelectedFilters(filters);
+    } else {
+      setSelectedFilters([...selectedFilters, selectedCategory]);
+    }
+  };
 
-		const filteredData = data.filter(article => article.category === category);
-		setArticles(filteredData)
-	}
+  useEffect(() => {
+    filterItems();
+  }, [selectedFilters]);
+
+  const filterItems = () => {
+    if (selectedFilters.length > 0) {
+      for(let i = 0; i<selectedFilters.length; i++ ){
+        for(let j = 0; j<eventos.length; j++){
+          if(selectedFilters[i] === eventos[j].type){
+          ;}
+        }
+      }
+      setEvents(items);
+    } else {
+      setEvents(events);
+    }
+    console.log(selectedFilters)
+  };
   return (
     <div className="main">
       <h1>CALENDARIO UACH 2023</h1>
       <div className="contenedor">
-      
+      <Stack spacing={2} align='center'>
+        {typevents.map((category) => (
+          <Button onClick={() => handleFilterButtonClick(category)}>
+            {category}
+          </Button>
+        ))}
+      </Stack>
+      <Stack spacing={2} align='center'>
+        {allCampus.map((campus) => (
+          <Button>
+            {campus}
+          </Button>
+        ))}
+      </Stack>
       <FullCalendar 
         eventBackgroundColor=""
         headerToolbar = "false"
@@ -41,16 +71,10 @@ export default function Home() {
         firstDay={1}
         locale = "esLocale"
         multiMonthMaxColumns = "1"
-        events = {[
-          {title:"a", start: '2023-10-13', className: ["Financiero","Valdivia"]},
-          {title:"b", start: '2023-10-15', end: '2023-10-17', backgroundColor: "blue"},
-        ]}
+        events = {eventos}
       />
-
       </div>
-      <div>
-        {categories}
+      
       </div>
-    </div>
   )
 }
