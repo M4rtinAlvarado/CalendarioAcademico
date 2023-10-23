@@ -1,22 +1,27 @@
 "use client"
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
 import FullCalendar from "@fullcalendar/react"
+import { Stack, HStack, VStack } from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
 import multiMonthPlugin from "@fullcalendar/multimonth";
-import eventos, { events } from './api/eventos';
+import { allCampus, typevents, events} from './api/eventos';
 
-
-
-function selectButton(selectedFilters, selectedCategory,events){
-  if (selectedFilters.includes(selectedCategory)){
-    arreglo.splice(arreglo.indexOf(selectedCategory), 1);  
-  }else{
-    arreglo.push(selectedCategory);
+/*const filterItems = () => {
+  if (selectedFilters.length > 0) {
+    for(let i = 0; i<selectedFilters.length; i++ ){
+      for(let j = 0; j<eventos.length; j++){
+        if(selectedFilters[i] === eventos[j].type){
+        ;}
+      }
+    }
+    setEvents(items);
+  } else {
+    setEvents(events);
   }
-  EventsAct(selectedFilters,events)
-  return ;
-}
+  console.log(selectedFilters)
+};*/
 
-function EventsAct(selectedFilters,events ) {
+/*function eventsAct(selectedFilters,events ) {
   for (i=0;i<events.length ; i++){
     if (!selectedFilters.includes(evenst[i].type)){
       events[i].display = "none";
@@ -24,30 +29,95 @@ function EventsAct(selectedFilters,events ) {
       events[i].display = "auto";
     }
   }
-  return ; }
+  return ; }*/
+
+/*function selectButton(selectedFilters, selectedCategory,events){
+  if (selectedFilters.includes(selectedCategory)){
+    arreglo.splice(arreglo.indexOf(selectedCategory), 1);  
+  }else{
+    arreglo.push(selectedCategory);
+  }
+  EventsAct(selectedFilters,events)
+  return ;
+}*/
+
+/*function eventsAct(selectedFilters,events ) {
+  for (i=0;i<events.length ; i++){
+    if (!selectedFilters.includes(evenst[i].type)){
+      events[i].display = "none";
+    }else{
+      events[i].display = "auto";
+    }
+  }
+  return ; }*/
+  
+  /*const handleFilterButtonClick = (selectedCategory) => {
+    if (selectedFilters.includes(selectedCategory)) {
+      let filters = selectedFilters.filter((a) => a !== selectedCategory);
+      setSelectedFilters(filters);
+    } else {
+      setSelectedFilters([...selectedFilters, selectedCategory]);
+    }
+  };*/
+
 
 export default function Home() {
-  const allCategories = [
-		'All',
-		...new Set(events.map(evento => evento.type)),
-	];
 
-	const [categories, setCategories] = useState(allCategories);
-	const [articles, setArticles] = useState(eventos);
+	const [selectedFilters, setSelectedFilters] = useState([]);
+	const [eventos,setEventos] = useState(events);
 
-	const filterCategory = (category) => {
-		if (category === 'All'){
-			setArticles(data)
-			return
-		}
 
-		const filteredData = data.filter(article => article.category === category);
-		setArticles(filteredData)
-	}
+  const selectButton = (selectedCategory) => {
+    if (selectedFilters.includes(selectedCategory)){
+      selectedFilters.splice(selectedFilters.indexOf(selectedCategory), 1);  
+    }else{
+      selectedFilters.push(selectedCategory);
+    }
+    console.log(eventos);
+    setSelectedFilters(selectedFilters)
+    console.log(selectedFilters);
+    console.log(events)
+    eventsAct();
+  };
+  
+  
+  useEffect(() => {
+    eventsAct();
+  }, [selectedFilters]);
+  
+  
+  const eventsAct = () => {
+    for (let i=0;i<eventos.length ; i++){
+      if (selectedFilters ==[]){
+        eventos[i].display = "auto";
+      }else{
+        if (!selectedFilters.includes(eventos[i].type)){
+          eventos[i].display = "none";
+        }else{
+          eventos[i].display = "auto";
+        }
+      }
+    }
+    setEventos(eventos);
+  }; 
+  
   return (
     <div className="main">
       <div className="contenedor">
-      
+      <Stack spacing={2} align='center'>
+        {typevents.map((category) => (
+          <Button onClick={() => selectButton(category)}>
+            {category}
+          </Button>
+        ))}
+      </Stack>
+      <Stack spacing={2} align='center'>
+        {allCampus.map((campus) => (
+          <Button>
+            {campus}
+          </Button>
+        ))}
+      </Stack>
       <FullCalendar 
         eventBackgroundColor=""
         headerToolbar = "false"
@@ -57,17 +127,11 @@ export default function Home() {
         initialView="multiMonthYear"
         firstDay={1}
         locale = "esLocale"
-        
-        events = {[
-          {title:"a", start: '2023-10-13', className: ["Valdivia","Financiero"]},
-          {title:"b", start: '2023-10-15', end: '2023-10-17', backgroundColor: "blue"},
-        ]}
+        multiMonthMaxColumns = "1"
+        events = {eventos}
       />
-
       </div>
-      <div>
-        {categories}
-      </div>
+      
       </div>
   )
 }
