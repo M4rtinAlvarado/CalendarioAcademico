@@ -41,25 +41,68 @@ export default function Home() {
   }, [selectedFilters]);
 
   const filterItems = () => {
-    if (selectedFilters.length > 0) {
-        const items = []
-        for(let j = 0; j < events.length; j++){
-          if(selectedFilters.includes(events[j].className)){
-            items.push(events[j])
-        }
-      
+
+    const campus =[]
+    const type = []
+    const items = []
+    for(let i = 0; i < selectedFilters.length; i++){
+      if (allCampus.includes(selectedFilters[i])){
+        campus.push(selectedFilters[i])
+      }else{
+        type.push(selectedFilters[i])
+      }
     }
-    console.log(selectedFilters)
-    console.log(items)
+
+    if (campus.length > 0 && type.length > 0) {
+        for(let j = 0; j < events.length; j++){
+          for(let i = 0; i < type.length; i++){
+              if(type[i] === events[j].className){
+                items.push(events[j])
+              }
+          }
+        }
+        for (let k = 0; k < items.length; k++){
+          for (let m = 0; m<campus.length ; m++){
+            if (items[k].sede.includes(campus[m])){
+            }
+            else{
+              items.splice(k,1)
+            }
+          }
+        }
     setEventos(items)
-  } else {
-      setEventos(events)
-    }}
+
+} else if (type.length > 0 && campus.length === 0){
+  for(let i = 0; i < type.length; i++){
+  for(let j = 0; j < events.length; j++){
+        if(type[i] === events[j].className){
+          items.push(events[j])
+        }
+    }
+  }
+  setEventos(items)
+}
+else if (campus.length > 0 && type.length === 0){
+  for(let l = 0; l < campus.length; l++){
+    for(let p = 0; p < events.length; p++){
+      if(events[p].sede.includes(campus[l]) && !(items.includes(events[p]))){
+          items.push(events[p])
+        }
+    }
+  }
+  setEventos(items)
+}
+else {
+    setEventos(events)
+  }
+}
+console.log(eventos)
+console.log(selectedFilters)
   
   return (
     <div className="main-home">
     <div className="contenedor-filtros">
-      <h1 className="title-filtros">Filtros</h1>
+      <h2 className="title-filtros">Filtros</h2>
       <Stack spacing={2} align='center'>
         {typevents.map((category) => (
           <Button onClick={() => handleFilterButtonClick(category)} className={category}>
