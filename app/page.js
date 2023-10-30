@@ -128,7 +128,7 @@ export default function Home() {
       <div className="contenedor-filtros">
         <h1 className="title-filtros">Filtros</h1>
         {typevents.map((category) => (
-          <Button margin={4} onClick={() => handleFilterButtonClick(category)} className={buttonState ? category : nonselected}>
+          <Button margin={4} onClick={() => handleFilterButtonClick(category)} className={category}>
             {category}
           </Button>
         ))}
