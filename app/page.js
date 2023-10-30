@@ -4,7 +4,6 @@ import Link from 'next/link'
 import interactionPlugin from '@fullcalendar/interaction'
 import multiMonthPlugin from "@fullcalendar/multimonth"
 import dayGridPlugin from '@fullcalendar/daygrid'
-import { eventos } from '@/app/api/eventos'
 import { allCampus, typevents, events } from './api/eventos'
 import { Stack, HStack, VStack } from '@chakra-ui/react'
 import {
@@ -129,7 +128,7 @@ export default function Home() {
       <div className="contenedor-filtros">
         <h1 className="title-filtros">Filtros</h1>
         {typevents.map((category) => (
-          <Button margin={4} onClick={() => handleFilterButtonClick(category)} className={category}>
+          <Button margin={4} onClick={() => handleFilterButtonClick(category)} className={buttonState ? category : nonselected}>
             {category}
           </Button>
         ))}
