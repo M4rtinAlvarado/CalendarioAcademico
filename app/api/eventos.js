@@ -18,6 +18,7 @@ import { NextResponse } from "next/server";
 export const events = 
     [  //PAG1
       {
+        description: "Período de matrícula para estudiantes de cursos superiores a través del portal www.uach.cl/alumnos.",
         title: "Matrícula de Cursos Superiores",
         className: "Admisión",
         sem: "Semestre1",
@@ -123,7 +124,7 @@ export const events =
       {
         description: "Periodo de receso del personal de la Universidad.",
         title: "Receso del Personal",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre1",
         start: "2023-01-30",
         end: "2023-02-28",
@@ -150,7 +151,7 @@ export const events =
       {
         description: "Periodo en que las Unidades solicitan estudiantes laborantes al Departamento de Bienestar Estudiantil, a través de www.uach.cl/funcionarios.",
         title: "Solicitud de Estudiantes Laborantes",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre1",
         start: "2023-03-01",
         end: "2023-03-30",
@@ -177,7 +178,7 @@ export const events =
       {
         description: "Bienvenida e Inducción para estudiantes Ingreso 2023 provenientes de Programas PACE, Propedéutico y Ranking 1000.",
         title: "Bienvenida e Inducción",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre1",
         start: "2023-03-03",
         end: "2023-03-07",
@@ -194,7 +195,7 @@ export const events =
       {
         description: "Periodo de inducción para estudiantes de intercambio del primer semestre.",
         title: "Inducción para Estudiantes de Intercambio",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre1",
         start: "2023-03-06",
         end: "2023-03-10",
@@ -212,7 +213,7 @@ export const events =
       {
         description: "Bienvenida Institucional y jornadas de inducción por parte de las Escuelas para estudiantes Ingreso 2023.",
         title: "Bienvenida Institucional",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre1",
         start: "2023-03-08",
         end: "2023-03-10",
@@ -637,7 +638,7 @@ export const events =
       {
         description: "Período de receso de las actividades del personal de la Universidad.",
         title: "Receso de Actividades del Personal",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre1",
         start: "2023-07-24",
         end: "2023-07-28",
@@ -826,7 +827,7 @@ export const events =
       {
         description: "Feriado estudiantil y día no laborable.",
         title: "Feriado Estudiantil",
-        className: "otros",
+        className: "Otros",
         sem: "Semestre2",
         start: "2023-08-14",
         sede: ["Valdivia", "PuertoMontt", "Patagonia"]
@@ -1137,7 +1138,9 @@ export const events =
       }
     ]
 
+    export const typevents = [...new Set(events.map(evento => evento.className))]
+    export const allCampus = [...new Set(events.reduce((acc, evento) => acc.concat(evento.sede), []))];
 
 export async function GET() {
-  return new NextResponse.json(eventos);
+  return new NextResponse.json(events);
 }
