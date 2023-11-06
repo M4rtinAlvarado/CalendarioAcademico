@@ -36,6 +36,8 @@ h3{
 }
 
 .contenedor-filtros{
+    display: flex;
+    flex-direction: column;
     height: auto;
     padding: 2%;
     border-radius: 1rem;
@@ -78,23 +80,6 @@ h3{
     margin-left: 5%;
 }
 
-.categoria-1{
-    width: auto;
-    border-radius: 1rem;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin-left: 4%;
-    background-color: rgb(84, 231, 84);
-}
-.categoria-2{
-    width: auto;
-    border-radius: 1rem;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin-left: 2%;
-    background-color: rgb(92, 121, 238);
-}
-
 .div-comentarios{
     width: 100%;
     display: flex;
@@ -119,17 +104,98 @@ h3{
 }
 
 .Financiero{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
     background-color: rgb(67, 170, 139);
 }
 
 .Académico{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
     background-color: rgb(249, 199, 79);
 }
 
 .Social{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
     background-color: rgb(249, 65, 68);
 }
 
 .Otros{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
     background-color: rgb(39, 125, 161);
+}
+
+.Docencia{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(17, 228, 235);
+}
+
+.Admisión{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(200, 65, 249);
+}
+
+.NonSelected{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(220, 220, 220);
+}
+.Valdivia{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(242, 166, 166);
+}
+.PuertoMontt{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(169, 255, 205);
+}
+.Patagonia{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(241, 157, 247);
+}
+
+.AcadémicoOff{
+    width: auto;
+    border: 1rem solid ​#f9c74f;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(255, 255, 255);
 }
