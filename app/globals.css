@@ -1,35 +1,199 @@
-
-.contenedor{
-    
-    display :flex;
-    flex-direction: column;
-    width: 100%;
-}
-
 header{
+    display: flex;
+    flex-direction: row;
     padding: 1%;
     text-align: left;
-    background-color: cornflowerblue;
+    background-color: #003554;
     color: white;
     font-weight: 500;
-}
-.main{
-    padding: 1rem;
-    text-align: center;
- 
+    margin-bottom: 1%;
 }
 
-h1{
+.title-evento{
+    font-weight: 700;
+    font-size: 2.6rem;
+}
+.title{
     font-size: 2rem;
 }
 
+.title-filtros{
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 5%;
+}
+
+h3{
+    font-size: 1.5rem;
+}
+
+.contenedor-calendario{
+    width: 100%;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+.contenedor-filtros{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 2%;
+    border-radius: 1rem;
+    width: 20%;
+    margin-left: 2%;
+    margin-bottom: 1%;
+    background-color: #6096ba;
+}
+
+.main-home{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-evento{
+    width: auto;
+    padding: 2%;
+    border-radius: 2rem;
+    border-width: 0.2rem;
+    border-color: black;
+    height: 100%;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.div-default{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 1%;
+}
+
+.fecha{     
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+    margin-left: 5%;
+}
+
+.div-comentarios{
+    width: 100%;
+    display: flex;
+    padding: 1%;
+    flex-direction: column;
+}
+
+.comentario{
+    background-color: rgb(206, 210, 213);
+    padding: 1%;
+    border-radius: 1rem;
+    border: 0.15rem solid black;
+    margin-bottom: 2%;
+    margin-left: 1%;
+}
+
+.form{
+    width: 100%;
+    display: flex;
+    padding: 1%;
+    flex-direction: row;
+}
+
 .Financiero{
-    background-color:blue;
-    border-width:0.3rem;
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(67, 170, 139);
+    cursor: pointer;
+}
+
+.Académico{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(249, 199, 79);
+    cursor: pointer;
+}
+
+.Social{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(249, 65, 68);
+    cursor: pointer;
+}
+
+.Otros{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(39, 125, 161);
+    cursor: pointer;
+}
+
+.Docencia{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(17, 228, 235);
+    cursor: pointer;
+}
+
+.Admisión{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(200, 65, 249);
+    cursor: pointer;
+}
+
+.NonSelected{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(220, 220, 220);
 }
 .Valdivia{
-    border-color: blanchedalmond;
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(255, 138, 138);
+    cursor: pointer;
 }
-.aa{
-    background-color: aqua;
+.PuertoMontt{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(90, 255, 158);
+    cursor: pointer;
+}
+.Patagonia{
+    width: auto;
+    border-radius: 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
+    background-color: rgb(206, 156, 69);
+    cursor: pointer;
 }
