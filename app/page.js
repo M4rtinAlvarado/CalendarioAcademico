@@ -66,6 +66,7 @@ export default function Home() {
   const [eventStartDate, setEventStartDate] = useState("")
   const [eventDescription, setEventDescription] = useState("")
   const [eventClassName, setEventClassName] = useState("")
+  const [eventSedes, setEventSedes] = useState([])
   const [eventEndDate, setEventEndDate] = useState("")
   const [selectedFilters, setSelectedFilters] = useState(typevents.concat(allCampus))
   const [eventos, setEventos] = useState(events)
@@ -73,6 +74,7 @@ export default function Home() {
 
   
   const handleFilterButtonClick = (selectedCategory) => {
+
 
     if (selectedFilters.includes(selectedCategory)) {
         let filters = selectedFilters.filter((a) => a !== selectedCategory)
@@ -83,6 +85,7 @@ export default function Home() {
         setSelectedFilters([...selectedFilters, selectedCategory])
         setEstado(changeState(selectedCategory, estado))
     }
+    
   };
   
     useEffect(() => {
@@ -101,7 +104,7 @@ export default function Home() {
           type.push(selectedFilters[i])
         }
       }
-  
+
       if (campus.length > 0 && type.length > 0) {
         for (let j = 0; j < events.length; j++) {
           for (let i = 0; i < type.length; i++) {
@@ -111,10 +114,14 @@ export default function Home() {
           }
         }
         for (let k = 0; k < items.length; k++) {
+          let aux = false
           for (let m = 0; m < campus.length; m++) {
-            if (!items[k].sede.includes(campus[m])) { 
-              items.splice(k, 1)
+            if (items[k].sede.includes(campus[m])) { 
+              aux = true 
             }
+          }
+          if(!aux){
+            items.splice(k, 1)
           }
         }
         setEventos(items)
@@ -134,9 +141,8 @@ export default function Home() {
         setEventos([])
       }
 
+
     }
-
-
 
 
 
@@ -166,6 +172,7 @@ export default function Home() {
             }
             setEventClassName(info.event.classNames[0])
             setEventDescription(info.event.extendedProps.description)
+            setEventSedes(info.event.extendedProps.sede)
             onOpen()
           }}
           headerToolbar={buildToolbar()}
@@ -195,7 +202,10 @@ export default function Home() {
             </div>
             <b><h3>Categoría:</h3></b>
             <div className="div-default">
-                <div className={eventClassName}>{eventClassName}</div>
+            <div className={eventClassName}>{eventClassName}</div>
+            {eventSedes.map((category) => (
+              <div className={category}>{category}</div>
+            ))}
             </div>
             <b><h3>Descripción:</h3></b>
             <div className="div-default">
