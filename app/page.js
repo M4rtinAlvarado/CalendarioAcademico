@@ -74,6 +74,7 @@ export default function Home() {
   
   const handleFilterButtonClick = (selectedCategory) => {
 
+
     if (selectedFilters.includes(selectedCategory)) {
         let filters = selectedFilters.filter((a) => a !== selectedCategory)
         setSelectedFilters(filters)
@@ -83,6 +84,7 @@ export default function Home() {
         setSelectedFilters([...selectedFilters, selectedCategory])
         setEstado(changeState(selectedCategory, estado))
     }
+    
   };
   
     useEffect(() => {
@@ -101,7 +103,8 @@ export default function Home() {
           type.push(selectedFilters[i])
         }
       }
-  
+      console.log(campus)
+      console.log(type)
       if (campus.length > 0 && type.length > 0) {
         for (let j = 0; j < events.length; j++) {
           for (let i = 0; i < type.length; i++) {
@@ -111,10 +114,14 @@ export default function Home() {
           }
         }
         for (let k = 0; k < items.length; k++) {
+          let aux = false
           for (let m = 0; m < campus.length; m++) {
-            if (!items[k].sede.includes(campus[m])) { 
-              items.splice(k, 1)
+            if (items[k].sede.includes(campus[m])) { 
+              aux = true 
             }
+          }
+          if(!aux){
+            items.splice(k, 1)
           }
         }
         setEventos(items)
@@ -134,6 +141,8 @@ export default function Home() {
         setEventos([])
       }
 
+      console.log(items)
+
     }
 
 
@@ -141,7 +150,7 @@ export default function Home() {
 
 
 
-
+  console.log(selectedFilters)
   return (
     <div className="main-home">
       <div className="contenedor-filtros">
