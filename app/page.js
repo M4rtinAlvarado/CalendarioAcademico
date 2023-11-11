@@ -2,7 +2,7 @@
 import FullCalendar from "@fullcalendar/react"
 import multiMonthPlugin from "@fullcalendar/multimonth"
 import dayGridPlugin from '@fullcalendar/daygrid'
-import { allCampus, typevents, events } from '@/app/api/eventos'
+import { allCampus, typeEvents, events } from '@/app/api/eventos'
 import {
   Input,
   Button,
@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from "react"
 import Boton from "@/app/components/Boton";
+import EventModal from "@/app/components/EventModal";
 
 
 
@@ -36,10 +37,10 @@ function buildValidRange() {
   }
 }
 
-function buildEstados(typevents){
+function buildEstados(typeEvents){
   let estados = [];
-  for(let i = 0; i < typevents.length; i++){
-    estados.push([typevents[i], false]);
+  for(let i = 0; i < typeEvents.length; i++){
+    estados.push([typeEvents[i], false]);
   }
   return estados;
 }
@@ -67,12 +68,12 @@ export default function Home() {
   const [eventDescription, setEventDescription] = useState("")
   const [eventClassName, setEventClassName] = useState("")
   const [eventEndDate, setEventEndDate] = useState("")
-  const [selectedFilters, setSelectedFilters] = useState(typevents)
-  const [eventos, setEventos] = useState(events)
-  const [estado, setEstado] = useState(buildEstados(typevents.concat(allCampus)))
+  const [selectedFilters, setSelectedFilters] = useState(typeEvents)
+  const [estado, setEstado] = useState(buildEstados(typeEvents.concat(allCampus)))
+  const [eventsArray, seteventsArray] = useState(events)
 
   
-  const handleFilterButtonClick = (selectedCategory) => {
+  const filterClickFunction = (selectedCategory) => {
 
     if (selectedFilters.includes(selectedCategory)) {
         let filters = selectedFilters.filter((a) => a !== selectedCategory)
@@ -119,7 +120,7 @@ export default function Home() {
             }
           }
         }
-        setEventos(items)
+        seteventsArray(items)
   
       } else if (type.length > 0 && campus.length === 0) {
         for (let i = 0; i < type.length; i++) {
@@ -129,7 +130,7 @@ export default function Home() {
             }
           }
         }
-        setEventos(items)
+        seteventsArray(items)
       }
       else if (campus.length > 0 && type.length === 0) {
         for (let l = 0; l < campus.length; l++) {
@@ -139,28 +140,22 @@ export default function Home() {
             }
           }
         }
-        setEventos(items)
+        seteventsArray(items)
       }
       else{
-        setEventos([])
+        seteventsArray([])
       }
     }
-
-
-
-
-
-
 
   return (
     <div className="main-home">
       <div className="contenedor-filtros">
         <h1 className="title-filtros">Filtros</h1>
-        {typevents.map((category) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => handleFilterButtonClick(category)} />
+        {typeEvents.map((category) => (
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} />
         ))}
         {allCampus.map((category) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => handleFilterButtonClick(category)} />
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} />
         ))}
       </div>
       <div className="contenedor-calendario">
@@ -189,40 +184,17 @@ export default function Home() {
           handleWindowResize='true'
           locale="esLocale"
 
-          events={eventos}
+          events={eventsArray}
         />
-        <>
-          <Modal isOpen={isOpen} onClose={onClose} size={"4xl"} motionPreset="scale">
-          <ModalOverlay/>
-          <ModalContent>
-            <ModalHeader>{eventTitle}</ModalHeader>
-            <ModalCloseButton color={"white"} size={"lg"}/>
-            <ModalBody>
-            <div className="div-default">
-                <div className="fecha">
-                    <b><h3>Fecha: {eventStartDate} - {eventEndDate}</h3></b>
-                </div>
-            </div>
-            <b><h3>Categoría:</h3></b>
-            <div className="div-default">
-                <div className={eventClassName}>{eventClassName}</div>
-            </div>
-            <b><h3>Descripción:</h3></b>
-            <div className="div-default">
-                <p>{eventDescription}</p>
-            </div>
-            <b><h3>Comentarios:</h3></b>
-            <div className="div-comentarios">
-                <div className="comentario">Comentario1</div>
-                <div className="form">
-                    <Input placeholder='Nuevo Comentario'  width= '90%' borderColor={'black'} marginRight={'2%'} />
-                    <Button variant='outline' borderColor={'black'} backgroundColor={'gray.300'}>Enviar</Button>
-                </div>
-            </div>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </>
+        <EventModal 
+          isOpen = {isOpen}
+          onClose = {onClose}
+          eventTitle = {eventTitle}
+          eventStartDate = {eventStartDate}
+          eventDescription = {eventDescription}
+          eventClassName = {eventClassName}
+          eventEndDate = {eventEndDate}
+        />
       </div>
 
     </div>
