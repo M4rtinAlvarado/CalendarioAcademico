@@ -11,12 +11,14 @@ import {
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react'
-
+  import { FaUserCircle } from "react-icons/fa";
 
 export default function EventModal(props) {
 
 
-    const { isOpen, onClose, eventTitle, eventStartDate, eventDescription, eventClassName, eventEndDate} = props;
+    const { isOpen, onClose, eventTitle, eventStartDate,
+            eventDescription, eventClassName, eventEndDate,
+            eventSedes, eventComentarios} = props;
 
     return(
         <>
@@ -31,22 +33,35 @@ export default function EventModal(props) {
                   <b><h3>Fecha: {eventStartDate} - {eventEndDate}</h3></b>
               </div>
           </div>
+
           <b><h3>Categoría:</h3></b>
-          <div className="div-default">
+            <div className="div-default">
               <div className={eventClassName}>{eventClassName}</div>
-          </div>
+              {eventSedes.map((category) => (
+                <div className={category}>{category}</div>
+              ))}
+            </div>
+
           <b><h3>Descripción:</h3></b>
           <div className="div-default">
               <p>{eventDescription}</p>
           </div>
+
           <b><h3>Comentarios:</h3></b>
           <div className="div-comentarios">
-              <div className="comentario">Comentario1</div>
-              <div className="form">
-                  <Input placeholder='Nuevo Comentario'  width= '90%' borderColor={'black'} marginRight={'2%'} />
-                  <Button variant='outline' borderColor={'black'} backgroundColor={'gray.300'}>Enviar</Button>
-              </div>
+              {eventComentarios.map((x) => (
+                <div className={x.enRespuestaA == "" ? "comentario" : "comentario-respuesta"}>
+                  <div className='userName'><FaUserCircle className='user-icon' />  {x.usuario}</div>
+                  <div className='text-comentario'>{x.comentario}</div>
+                </div>
+              ))}
           </div>
+            <div className="form">
+                <Input placeholder='Ingrese Usuario'  width= '20%' borderColor={'black'} marginRight={'2%'} />
+                <Input placeholder='Ingrese Comentario'  width= '70%' borderColor={'black'} marginRight={'2%'} />
+                <Button variant='outline' borderColor={'black'} backgroundColor={'gray.300'}>Enviar</Button>
+            </div>
+            
           </ModalBody>
         </ModalContent>
       </Modal>

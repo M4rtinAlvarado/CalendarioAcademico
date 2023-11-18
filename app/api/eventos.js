@@ -59,7 +59,7 @@ export const events =
       },
       {
         description: "Curso de Formación en Docencia Universitaria para Habilitación Pedagógica, a cargo del Departamento de Aseguramiento de la Calidad e Innovación Curricular (DACIC), disponible para docentes de las Sedes Valdivia, Puerto Montt y Campus Patagonia.",
-        title: "Curso de Formación en Docencia Universitaria",
+        title: "Curso de Formación en Docencia Universitaria (1er Semestre)",
         className: "Docencia",
         sem: "Semestre1",
         start: "2023-01-17",
@@ -78,7 +78,7 @@ export const events =
       },
       {
         description: "Primer período de matrícula Proceso de Admisión 2023 (Seleccionados, BEA, PACE e ingresos especiales).",
-        title: "Matrícula Proceso de Admisión",
+        title: "Matrícula Proceso de Admisión (1er Período)",
         className: "Admisión",
         sem: "Semestre1",
         start: "2023-01-18",
@@ -107,7 +107,7 @@ export const events =
       },
       {
         description: "Segundo período de matrícula Proceso de Admisión 2023 (Listas de espera, lista adicional de espera, BEA, PACE e ingresos especiales).",
-        title: "Matrícula Proceso de Admisión",
+        title: "Matrícula Proceso de Admisión (2do Período)",
         className: "Admisión",
         sem: "Semestre1",
         start: "2023-01-21",
@@ -547,7 +547,7 @@ export const events =
       },
       {
         description: "Último día para que estudiantes de carreras semestrales anulen una asignatura o módulo",
-        title: "Anulación de Asignatura o Módulo",
+        title: "Anulación de Asignaturas o Módulo (1er Semestre)",
         className: "Académico",
         sem: "Semestre1",
         start: "2023-05-24",
@@ -612,7 +612,7 @@ export const events =
       },
       {
         description: "Último día para que Directores y Directoras de Escuela resuelvan las solicitudes de anulación de asignaturas realizadas por los estudiantes.",
-        title: "Resolución de Anulación de Asignaturas",
+        title: "Resolución de Anulación de Asignaturas (1er Semestre)",
         className: "Docencia",
         sem: "Semestre1",
         start: "2023-06-07",
@@ -660,7 +660,7 @@ export const events =
       },
       {
         description: "Curso de Formación en Docencia Universitaria para Habilitación Pedagógica, a cargo del Departamento de Aseguramiento de la Calidad e Innovación Curricular (DACIC), disponible para docentes de las Sedes Valdivia, Puerto Montt y Campus Patagonia.",
-        title: "Curso de Formación en Docencia Universitaria",
+        title: "Curso de Formación en Docencia Universitaria (2do Semestre)",
         className: "Docencia",
         sem: "Semestre1",
         start: "2023-07-03",
@@ -758,10 +758,10 @@ export const events =
       },
       {
         description: "Inicio del proceso de renovación de las Becas de Mantención JUNAEB (Beca Presidente de la República, Beca Indígena y Beca de Residencia Indígena, Beca Integración Territorial, Beca Patagonia, Beca Aysén) para el segundo semestre del año 2023, a través de la página portalbecas.junaeb.cl/sinabweb.",
-        title: "Renovación de Becas de Mantención JUNAEB",
+        title: "Renovación de Becas de Mantención JUNAEB (Agosto)",
         className: "Académico",
         sem: "Semestre2",
-        start: "2023-08-01",//fecha por definir
+        start: "",//fecha por definir
         sede: ["Valdivia", "PuertoMontt", "Patagonia"],
         id:"77"
       },
@@ -1062,7 +1062,7 @@ export const events =
         title: "Postulación a Crédito con Garantía Estatal",
         className: "Financiero",
         sem: "Semestre2",
-        start: "2023-09-01",
+        start: "",
         sede: ["Valdivia", "PuertoMontt", "Patagonia"],
         id:"109"
       },
@@ -1071,7 +1071,7 @@ export const events =
         title: "Postulación a Gratuidad, Becas y Créditos",
         className: "Financiero",
         sem: "Semestre2",
-        start: "2023-09-01",
+        start: "",
         sede: ["Valdivia", "PuertoMontt", "Patagonia"],
         id:"110"
       },
@@ -1125,7 +1125,7 @@ export const events =
       },
       {
         description: "Último día para que estudiantes de carreras semestrales anulen una asignatura o módulo a través de www.uach.cl/alumnos.",
-        title: "Anulación de Asignaturas o Módulos",
+        title: "Anulación de Asignaturas o Módulos (2do Semestre)",
         className: "Académico",
         sem: "Semestre2",
         start: "2023-10-26",
@@ -1144,7 +1144,7 @@ export const events =
       },
       {
         description: "Último día para que los Directores y Directoras de Escuela resuelvan las solicitudes de anulación de asignaturas realizadas por los estudiantes.",
-        title: "Resolución de Anulación de Asignaturas",
+        title: "Resolución de Anulación de Asignaturas (2do Semestre)",
         className: "Docencia",
         sem: "Semestre2",
         start: "2023-11-03",
@@ -1183,10 +1183,10 @@ export const events =
       },
       {
         description: "Período de renovación de Becas de Mantención JUNAEB (Presidente de la República, Beca Indígena y Beca de Residencia Indígena, Beca Integración Territorial, Beca Patagonia, Beca Aysén) para primer semestre del año 2024 en el sitio portalbecas.junaeb.cl/sinabweb/",
-        title: "Renovación de Becas de Mantención JUNAEB",
+        title: "Renovación de Becas de Mantención JUNAEB (Diciembre)",
         className: "Financiero",
         sem: "Semestre2",
-        start: "2024-12-01", // Debes definir la fecha
+        start: "", // Debes definir la fecha
         sede: ["Valdivia", "PuertoMontt", "Patagonia"],
         id:"122"
       },

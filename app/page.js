@@ -3,22 +3,11 @@ import FullCalendar from "@fullcalendar/react"
 import multiMonthPlugin from "@fullcalendar/multimonth"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { allCampus, typeEvents, events } from '@/app/api/eventos'
-import {
-  Input,
-  Button,
-  ButtonGroup,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from '@chakra-ui/react'
+import {useDisclosure} from '@chakra-ui/react'
 import { useEffect, useState } from "react"
 import Boton from "@/app/components/Boton";
 import EventModal from "@/app/components/EventModal";
+import SearchBar from "@/app/components/SearchBar";
 
 
 
@@ -33,7 +22,7 @@ function buildToolbar() {
 function buildValidRange() {
   return {
     start: '2023-01-01',
-    end: '2024-01-01'
+    end: '2025-01-01'
   }
 }
 
@@ -68,6 +57,7 @@ export default function Home() {
   const [eventDescription, setEventDescription] = useState("")
   const [eventClassName, setEventClassName] = useState("")
   const [eventEndDate, setEventEndDate] = useState("")
+  const [eventSedes, setEventSedes] = useState([])
   const [selectedFilters, setSelectedFilters] = useState(typeEvents)
   const [estado, setEstado] = useState(buildEstados(typeEvents.concat(allCampus)))
   const [eventsArray, seteventsArray] = useState(events)
@@ -148,15 +138,24 @@ export default function Home() {
     }
 
   return (
+    <>
+    <header>
+          <div className="title">
+            <a href="" ><h1 >CALENDARIO UACH</h1></a>
+          </div>
+          
+          <SearchBar placeholder={"Buscar"} data = {events}/>
+        </header>
     <div className="main-home">
       <div className="contenedor-filtros">
         <h1 className="title-filtros">Filtros</h1>
-        {typeEvents.map((category) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} />
-        ))}
-        {allCampus.map((category) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} />
-        ))}
+        {typeEvents.map((category, index) => (
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index} />
+          ))}
+        {allCampus.map((category, index) => (
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index}/>
+          ))}
+        
       </div>
       <div className="contenedor-calendario">
       
@@ -171,6 +170,7 @@ export default function Home() {
             }
             setEventClassName(info.event.classNames[0])
             setEventDescription(info.event.extendedProps.description)
+            setEventSedes(info.event.extendedProps.sede)
             onOpen()
           }}
           headerToolbar={buildToolbar()}
@@ -186,6 +186,8 @@ export default function Home() {
 
           events={eventsArray}
         />
+        {
+        isOpen ? (
         <EventModal 
           isOpen = {isOpen}
           onClose = {onClose}
@@ -194,9 +196,17 @@ export default function Home() {
           eventDescription = {eventDescription}
           eventClassName = {eventClassName}
           eventEndDate = {eventEndDate}
-        />
+          eventSedes = {eventSedes}
+          eventComentarios = {[{usuario: "andres", comentario: "buen evento", enRespuestaA: ""},
+                              {usuario: "martin", comentario: "deja de mentir andres", enRespuestaA: "123"},
+                              {usuario: "osvaldo", comentario: "muy buen evento", enRespuestaA: ""},
+                              {usuario: "isaias", comentario: "mal evento", enRespuestaA: ""},
+                              {usuario: "mardones", comentario: "no tan buen evento", enRespuestaA: ""}]}
+        />) : null
+        }
       </div>
 
     </div>
+    </>
   )
 }

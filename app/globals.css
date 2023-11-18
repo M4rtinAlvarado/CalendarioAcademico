@@ -1,4 +1,7 @@
+/* Página Principal */
 header{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     padding: 1%;
@@ -14,13 +17,14 @@ header{
     font-size: 2.6rem;
 }
 .title{
-    margin-right: 72%;
+    width: 100%;
     font-size: 2rem;
 }
 
 .title-filtros{
+
     color: white;
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 600;
     margin: 5%;
 }
@@ -31,6 +35,7 @@ h3{
 
 .contenedor-calendario{
     width: 100%;
+    height: auto;
     margin-right: 1%;
     margin-left: 1%;
 }
@@ -38,10 +43,10 @@ h3{
 .contenedor-filtros{
     display: flex;
     flex-direction: column;
-    height: auto;
     padding: 2%;
     border-radius: 1rem;
     width: 20%;
+    height: 100%;
     margin-left: 2%;
     margin-bottom: 1%;
     background-color: #6096ba;
@@ -53,6 +58,8 @@ h3{
     flex-direction: row;
 }
 
+
+/* EventModal */
 .main-evento{
     width: auto;
     padding: 2%;
@@ -67,7 +74,9 @@ h3{
 }
 
 .div-default{
-    width: auto;
+    overflow: inherit;
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
     padding: 1%;
@@ -82,9 +91,11 @@ h3{
 
 .div-comentarios{
     width: 100%;
+    max-height: 10rem;
     display: flex;
     padding: 1%;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .comentario{
@@ -92,8 +103,31 @@ h3{
     padding: 1%;
     border-radius: 1rem;
     border: 0.15rem solid black;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     margin-left: 1%;
+}
+
+.comentario-respuesta{
+    background-color: rgb(225, 231, 236);
+    padding: 1%;
+    border-radius: 1rem;
+    border: 0.15rem solid black;
+    margin-bottom: 1%;
+    margin-left: 5%;
+}
+
+.userName{
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.user-icon{
+    margin-right: 0.5%;
+}
+
+.text-comentario{
+    margin-left: 2%;
 }
 
 .form{
@@ -103,6 +137,8 @@ h3{
     flex-direction: row;
 }
 
+
+/* Filtros y eventos */
 .Financiero{
     width: auto;
     border-radius: 0.5rem;
@@ -196,4 +232,71 @@ h3{
     padding-right: 5%;
     margin-left: 4%;
     background-color: rgb(241, 157, 247);
+}
+
+/*SearchBar*/
+.search{
+    width: 100%;
+    height: 100%;
+    margin-left: 30%;
+
+}
+.searchInputs{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    width: 100%;
+}
+
+.dataitem p{
+    margin-left: 2%;
+}
+
+ul {
+    text-decoration: none;
+}
+
+ul :hover {
+    background-color: lightgrey;
+}
+
+.clearBtn {
+    color: brown;
+    cursor: pointer;
+    background-color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.dataResult::-webkit-scrollbar{
+    display: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.dataResult {
+    color: black;/*layout*/
+    position: absolute;
+    margin-top: 0.5%;
+    margin-right: 2%;
+    max-width: 50%;
+    max-height: 90px; 
+    background-color: white;
+    overflow: hidden;
+    overflow-y: auto;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.search input{
+    color:  black;/*layout*/
+    background-color: white;
+    font-size: 1.2rem;
+    padding: 3%;
+    height: 30px;
+    width: 200%;
 }
