@@ -1,26 +1,16 @@
 "use client"
 import FullCalendar from "@fullcalendar/react"
-import Link from 'next/link'
-import interactionPlugin from '@fullcalendar/interaction'
 import multiMonthPlugin from "@fullcalendar/multimonth"
 import dayGridPlugin from '@fullcalendar/daygrid'
-import { allCampus, typevents, events } from './api/eventos'
-import { Stack, HStack, VStack } from '@chakra-ui/react'
+import { allCampus, typeEvents, events } from '@/app/api/eventos'
 import {
-  Input,
-  Button,
-  ButtonGroup,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
 } from '@chakra-ui/react'
 import { useEffect, useState } from "react"
 import Boton from "@/app/components/Boton";
+import EventModal from "@/app/components/EventModal";
+import SearchBar from "@/app/components/SearchBar";
+
 
 
 function buildToolbar() {
@@ -33,14 +23,15 @@ function buildToolbar() {
 
 function buildValidRange() {
   return {
-    start:'2023-01-01',
+    start: '2023-01-01',
     end: '2024-01-01'
   }
 }
-function buildEstados(typevents){
+
+function buildEstados(typeEvents){
   let estados = [];
-  for(let i = 0; i < typevents.length; i++){
-    estados.push([typevents[i], false]);
+  for(let i = 0; i < typeEvents.length; i++){
+    estados.push([typeEvents[i], false]);
   }
   return estados;
 }
@@ -60,99 +51,114 @@ function changeState(category, estados){
 }
 
 
+
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [eventTitle, setEventTitle,] = useState("")
   const [eventStartDate, setEventStartDate] = useState("")
+  const [eventEndDate, setEventEndDate] = useState("")
   const [eventDescription, setEventDescription] = useState("")
   const [eventClassName, setEventClassName] = useState("")
-  const [eventEndDate, setEventEndDate] = useState("")
-	const [selectedFilters, setSelectedFilters] = useState(typevents.concat(allCampus))
-	const [eventos, setEventos] = useState(events);
-  const [estado, setEstado] = useState(buildEstados(typevents.concat(allCampus)))
+  const [eventID, setEventID] = useState("1")
+  const [eventSedes, setEventSedes] = useState([]) 
+  const [selectedFilters, setSelectedFilters] = useState(typeEvents)
+  const [estado, setEstado] = useState(buildEstados(typeEvents.concat(allCampus)))
+  const [eventsArray, seteventsArray] = useState(events)
 
-  const handleFilterButtonClick = (selectedCategory) => {
+  
+  const filterClickFunction = (selectedCategory) => {
+
     if (selectedFilters.includes(selectedCategory)) {
-      let filters = selectedFilters.filter((a) => a !== selectedCategory)
-      setSelectedFilters(filters)
-      setEstado(changeState(selectedCategory, estado))
-    } else {
-      setSelectedFilters([...selectedFilters, selectedCategory])
-      setEstado(changeState(selectedCategory, estado))
+        let filters = selectedFilters.filter((a) => a !== selectedCategory)
+        setSelectedFilters(filters)
+        setEstado(changeState(selectedCategory, estado))
+    } 
+    else {
+        setSelectedFilters([...selectedFilters, selectedCategory])
+        setEstado(changeState(selectedCategory, estado))
     }
   };
-
-  useEffect(() => {
-    filterItems();
-  }, [selectedFilters]);
-
-  const filterItems = () => {
-
-    const campus =[]
-    const type = []
-    const items = []
-    for(let i = 0; i < selectedFilters.length; i++){
-      if (allCampus.includes(selectedFilters[i])){
-        campus.push(selectedFilters[i])
-      }else{
-        type.push(selectedFilters[i])
+  
+    useEffect(() => {
+      filterItems();
+    }, [selectedFilters]);
+  
+    const filterItems = () => {
+  
+      const campus = []
+      const type = []
+      const items = []
+      for (let i = 0; i < selectedFilters.length; i++) {
+        if (allCampus.includes(selectedFilters[i])) {
+          campus.push(selectedFilters[i])
+        } else {
+          type.push(selectedFilters[i])
+        }
+      }
+  
+      if (campus.length > 0 && type.length > 0) {
+        for (let j = 0; j < events.length; j++) {
+          for (let i = 0; i < type.length; i++) {
+            if (type[i] === events[j].className) {
+              items.push(events[j])
+            }
+          }
+        }
+        for (let k = 0; k < items.length; k++) {
+          for (let m = 0; m < campus.length; m++) {
+            if (items[k].sede.includes(campus[m])) {
+            }
+            else {
+              items.splice(k, 1)
+            }
+          }
+        }
+        seteventsArray(items)
+  
+      } else if (type.length > 0 && campus.length === 0) {
+        for (let i = 0; i < type.length; i++) {
+          for (let j = 0; j < events.length; j++) {
+            if (type[i] === events[j].className) {
+              items.push(events[j])
+            }
+          }
+        }
+        seteventsArray(items)
+      }
+      else if (campus.length > 0 && type.length === 0) {
+        for (let l = 0; l < campus.length; l++) {
+          for (let p = 0; p < events.length; p++) {
+            if (events[p].sede.includes(campus[l]) && !(items.includes(events[p]))) {
+              items.push(events[p])
+            }
+          }
+        }
+        seteventsArray(items)
+      }
+      else{
+        seteventsArray([])
       }
     }
 
-    if (campus.length > 0 && type.length > 0) {
-        for(let j = 0; j < events.length; j++){
-          for(let i = 0; i < type.length; i++){
-              if(type[i] === events[j].className){
-                items.push(events[j])
-              }
-          }
-        }
-        for (let k = 0; k < items.length; k++){
-          for (let m = 0; m<campus.length ; m++){
-            if (items[k].sede.includes(campus[m])){
-            }
-            else{
-              items.splice(k,1)
-            }
-          }
-        }
-    setEventos(items)
-
-} else if (type.length > 0 && campus.length === 0){
-  for(let i = 0; i < type.length; i++){
-  for(let j = 0; j < events.length; j++){
-        if(type[i] === events[j].className){
-          items.push(events[j])
-        }
-    }
-  }
-  setEventos(items)
-}
-else if (campus.length > 0 && type.length === 0){
-  for(let l = 0; l < campus.length; l++){
-    for(let p = 0; p < events.length; p++){
-      if(events[p].sede.includes(campus[l]) && !(items.includes(events[p]))){
-          items.push(events[p])
-        }
-    }
-  }
-  setEventos(items)
-}
-else {
-    setEventos([])
-  }
-}
-  
   return (
+    <>
+    <header>
+          <div className="title">
+            <a href="" ><h1 >CALENDARIO UACH</h1></a>
+          </div>
+          
+          <SearchBar placeholder={"Buscar"} data = {events}/>
+        </header>
     <div className="main-home">
       <div className="contenedor-filtros">
         <h1 className="title-filtros">Filtros</h1>
-        {typevents.map((category) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => handleFilterButtonClick(category)} />
-        ))}
-        {allCampus.map((category) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => handleFilterButtonClick(category)} />
-        ))}
+        {typeEvents.map((category, index) => (
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index} />
+          ))}
+        {allCampus.map((category, index) => (
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index}/>
+          ))}
+        
       </div>
       <div className="contenedor-calendario">
       
@@ -167,6 +173,8 @@ else {
             }
             setEventClassName(info.event.classNames[0])
             setEventDescription(info.event.extendedProps.description)
+            setEventSedes(info.event.extendedProps.sede)
+            setEventID(info.event.id)
             onOpen()
           }}
           headerToolbar={buildToolbar()}
@@ -180,41 +188,24 @@ else {
           handleWindowResize='true'
           locale="esLocale"
 
-          events={eventos}
+          events={eventsArray}
         />
-        <>
-          <Modal isOpen={isOpen} onClose={onClose} size={"4xl"} motionPreset="scale">
-          <ModalOverlay/>
-          <ModalContent>
-            <ModalHeader>{eventTitle}</ModalHeader>
-            <ModalCloseButton color={"white"} size={"lg"}/>
-            <ModalBody>
-            <div className="div-default">
-                <div className="fecha">
-                    <b><h3>Fecha: {eventStartDate} - {eventEndDate}</h3></b>
-                </div>
-            </div>
-            <b><h3>Categoría:</h3></b>
-            <div className="div-default">
-                <div className={eventClassName}>{eventClassName}</div>
-            </div>
-            <div className="div-default">
-                <p>{eventDescription}</p>
-            </div>
-            <b><h3>Comentarios:</h3></b>
-            <div className="div-comentarios">
-                <div className="comentario">Comentario1</div>
-                <div className="form">
-                    <Input placeholder='Nuevo Comentario'  width= '90%' borderColor={'black'} marginRight={'2%'} />
-                    <Button variant='outline' borderColor={'black'} backgroundColor={'gray.300'}>Enviar</Button>
-                </div>
-            </div>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </>
+        {
+        isOpen ? (
+        <EventModal 
+          isOpen = {isOpen}
+          onClose = {onClose}
+          eventTitle = {eventTitle}
+          eventStartDate = {eventStartDate}
+          eventDescription = {eventDescription}
+          eventClassName = {eventClassName}
+          eventEndDate = {eventEndDate}
+          eventSedes = {eventSedes}
+          eventID = {eventID}
+        />) : null
+        }
       </div>
 
     </div>
-)
+    </>)
 }
