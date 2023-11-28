@@ -12,7 +12,7 @@ export default function Boton(props) {
     }
     
     return(
-        <Button margin={2} className={nombre} onClick={click}>
+        <Button margin={2} className={nombre} onClick={click} _hover={{bg: ""}}>
             {clase}
         </Button>
     )

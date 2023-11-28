@@ -19,6 +19,7 @@ function buildToolbar() {
   }
 }
 
+
 function buildValidRange() {
   return {
     start: '2023-01-01',
@@ -57,11 +58,26 @@ export default function Home() {
   const [eventDescription, setEventDescription] = useState("")
   const [eventClassName, setEventClassName] = useState("")
   const [eventEndDate, setEventEndDate] = useState("")
+  const [eventID, setEventID] = useState()
   const [eventSedes, setEventSedes] = useState([])
   const [selectedFilters, setSelectedFilters] = useState(typeEvents)
   const [estado, setEstado] = useState(buildEstados(typeEvents.concat(allCampus)))
-  const [eventsArray, seteventsArray] = useState(events)
+  const [eventsArray, setEventsArray] = useState(events)
 
+  function limpiarTodos(){
+    setSelectedFilters([])
+    for(let i = 0; i < estado.length; i++){
+      estado[i][1] = true
+    }
+    setEstado(estado)
+
+  }
+
+  function mostrarTodos(){
+    setSelectedFilters(typeEvents)
+    setEstado(buildEstados(typeEvents.concat(allCampus)))
+  }
+  
   
   const filterClickFunction = (selectedCategory) => {
 
@@ -110,7 +126,7 @@ export default function Home() {
             }
           }
         }
-        seteventsArray(items)
+        setEventsArray(items)
   
       } else if (type.length > 0 && campus.length === 0) {
         for (let i = 0; i < type.length; i++) {
@@ -120,42 +136,36 @@ export default function Home() {
             }
           }
         }
-        seteventsArray(items)
+        setEventsArray(items)
       }
-      else if (campus.length > 0 && type.length === 0) {
-        for (let l = 0; l < campus.length; l++) {
-          for (let p = 0; p < events.length; p++) {
-            if (events[p].sede.includes(campus[l]) && !(items.includes(events[p]))) {
-              items.push(events[p])
-            }
-          }
-        }
-        seteventsArray(items)
-      }
+
       else{
-        seteventsArray([])
+        setEventsArray([])
       }
     }
 
   return (
-    <>
+    <div className="main">
     <header>
           <div className="title">
-            <a href="" ><h1 >CALENDARIO UACH</h1></a>
+            <a href="">CALENDARIO UACH</a>
           </div>
           
           <SearchBar placeholder={"Buscar"} data = {events}/>
         </header>
     <div className="main-home">
       <div className="contenedor-filtros">
-        <h1 className="title-filtros">Filtros</h1>
+        <div className="div-filtros">
+          <h1 className="title-filtros">Filtros</h1>
+          <div className="mostrar-button"><u onClick={() => {mostrarTodos()}}>Mostrar Todos</u></div>
+        </div>
         {typeEvents.map((category, index) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index} />
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index}/>
           ))}
         {allCampus.map((category, index) => (
           <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index}/>
           ))}
-        
+        <div className="limpiar-button"><u onClick={() => {limpiarTodos()}}>Limpiar filtros</u></div>
       </div>
       <div className="contenedor-calendario">
       
@@ -171,6 +181,7 @@ export default function Home() {
             setEventClassName(info.event.classNames[0])
             setEventDescription(info.event.extendedProps.description)
             setEventSedes(info.event.extendedProps.sede)
+            setEventID(info.event.id)
             onOpen()
           }}
           headerToolbar={buildToolbar()}
@@ -197,16 +208,13 @@ export default function Home() {
           eventClassName = {eventClassName}
           eventEndDate = {eventEndDate}
           eventSedes = {eventSedes}
-          eventComentarios = {[{usuario: "andres", comentario: "buen evento", enRespuestaA: ""},
-                              {usuario: "martin", comentario: "deja de mentir andres", enRespuestaA: "123"},
-                              {usuario: "osvaldo", comentario: "muy buen evento", enRespuestaA: ""},
-                              {usuario: "isaias", comentario: "mal evento", enRespuestaA: ""},
-                              {usuario: "mardones", comentario: "no tan buen evento", enRespuestaA: ""}]}
+          eventComentarios = {[]}
+          eventID = {eventID}
         />) : null
         }
       </div>
 
     </div>
-    </>
+    </div>
   )
 }
