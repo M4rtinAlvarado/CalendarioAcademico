@@ -1,4 +1,8 @@
+/* Página Principal */
+
 header{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     padding: 1%;
@@ -13,15 +17,17 @@ header{
     font-weight: 700;
     font-size: 2.6rem;
 }
+
 .title{
+    width: 100%;
     font-size: 2rem;
 }
 
 .title-filtros{
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin: 5%;
+    margin: 1%;
 }
 
 h3{
@@ -30,6 +36,7 @@ h3{
 
 .contenedor-calendario{
     width: 100%;
+    height: 100%;
     margin-right: 1%;
     margin-left: 1%;
 }
@@ -37,13 +44,39 @@ h3{
 .contenedor-filtros{
     display: flex;
     flex-direction: column;
-    height: auto;
-    padding: 2%;
+    padding: 1%;
     border-radius: 1rem;
     width: 20%;
+    height: 100%;
     margin-left: 2%;
     margin-bottom: 1%;
     background-color: #6096ba;
+}
+
+.div-filtros{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.limpiar-button{
+    text-align: right;
+}
+
+.limpiar-button u{
+    color: white;
+    margin: 1.8%;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+}
+
+.mostrar-button u{
+    color: white;
+    margin: 1.8%;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
 }
 
 .main-home{
@@ -52,6 +85,8 @@ h3{
     flex-direction: row;
 }
 
+
+/* EventModal */
 .main-evento{
     width: auto;
     padding: 2%;
@@ -66,7 +101,9 @@ h3{
 }
 
 .div-default{
-    width: auto;
+    overflow: auto;
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
     padding: 1%;
@@ -81,9 +118,11 @@ h3{
 
 .div-comentarios{
     width: 100%;
+    max-height: 10rem;
     display: flex;
     padding: 1%;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .comentario{
@@ -91,9 +130,74 @@ h3{
     padding: 1%;
     border-radius: 1rem;
     border: 0.15rem solid black;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     margin-left: 1%;
 }
+
+.comentario-respuesta{
+    background-color: rgb(225, 231, 236);
+    padding: 1%;
+    border-radius: 1rem;
+    border: 0.15rem solid black;
+    margin-bottom: 1%;
+    margin-left: 5%;
+}
+
+.userName{
+    width: 100%;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.comentario-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.userName p{
+    margin-left: 2%;
+}
+
+.comentario-header Button{
+    height: 1%;
+}
+
+
+.user-icon{
+    margin-right: 0.5%;
+}
+
+.text-comentario{
+    margin-left: 2%;
+}
+
+.div-comentar{
+    display: flex;
+    flex-direction: column;
+}
+
+.responder-header{
+    display: flex;
+    flex-direction: row;
+    background-color: #003554;
+    width: 99%;
+    margin: 0.5rem;
+    margin-bottom: 0rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.div-responder{
+    width: 100%;
+    color: white;
+}
+
+.responder-header Button{
+    height: 1%;
+}
+
+
 
 .form{
     width: 100%;
@@ -102,82 +206,89 @@ h3{
     flex-direction: row;
 }
 
+
+/* Filtros y eventos */
 .Financiero{
     width: auto;
     border-radius: 0.5rem;
+    background-color: rgb(67, 170, 139);
+    cursor: pointer;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(67, 170, 139);
-    cursor: pointer;
 }
 
 .Académico{
     width: auto;
     border-radius: 0.5rem;
+    background-color: rgb(249, 199, 79);
+    cursor: pointer;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(249, 199, 79);
-    cursor: pointer;
 }
 
 .Social{
     width: auto;
     border-radius: 0.5rem;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin-left: 4%;
     background-color: rgb(249, 65, 68);
     cursor: pointer;
-}
-
-.Otros{
-    width: auto;
-    border-radius: 0.5rem;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(39, 125, 161);
-    cursor: pointer;
 }
 
 .Docencia{
     width: auto;
     border-radius: 0.5rem;
+    background-color: rgb(17, 228, 235);
+    cursor: pointer;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(17, 228, 235);
-    cursor: pointer;
 }
 
 .Admisión{
     width: auto;
     border-radius: 0.5rem;
+    background-color: rgb(200, 65, 249);
+    cursor: pointer;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(200, 65, 249);
+}
+
+.Otros{
+    width: auto;
+    border-radius: 0.5rem;
+    background-color: rgb(39, 125, 161);
     cursor: pointer;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 4%;
 }
 
 .NonSelected{
     width: auto;
     border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(220, 220, 220);
 }
+
+.NonSelected:hover{
+    background-color: white;
+}
+
 .Valdivia{
     width: auto;
     border-radius: 0.5rem;
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(255, 138, 138);
-    cursor: pointer;
+    background-color: rgb(242, 166, 166);
 }
 .PuertoMontt{
     width: auto;
@@ -185,8 +296,7 @@ h3{
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(90, 255, 158);
-    cursor: pointer;
+    background-color: rgb(169, 255, 205);
 }
 .Patagonia{
     width: auto;
@@ -194,6 +304,86 @@ h3{
     padding-left: 5%;
     padding-right: 5%;
     margin-left: 4%;
-    background-color: rgb(206, 156, 69);
+    background-color: rgb(241, 157, 247);
+    
+}
+
+
+/*SearchBar*/
+
+.search{
+    width: 90%;
+    height: 90%;
+}
+.searchInputs{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 2rem;
+    width: 100%;
+}
+
+.searchIcon{
+    margin: 0.5rem;
+}
+
+.deleteIcon{
+    margin: 0.5rem;
     cursor: pointer;
+}
+
+.dataitem p{
+    margin-left: 2%;
+}
+
+ul {
+    text-decoration: none;
+}
+
+ul :hover {
+    background-color: #003554;
+    color: white;
+    padding: 0.2rem;
+}
+
+.clearBtn {
+    color: brown;
+    cursor: pointer;
+    background-color: white;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.dataResult::-webkit-scrollbar{
+    display: flex;
+}
+.dataResult::-webkit-scrollbar-thumb { 
+    background-color: #888; border-radius: 10%;
+}
+
+input:focus {
+    outline: none;
+}
+
+.dataResult {
+    color: rgb(0, 0, 0);/*layout*/
+    position: absolute;
+    margin-top: 0.5%;
+    margin-right: 2%;
+    width: 46.5%;
+    max-height: 12%; 
+    background-color: #dcdbdb;
+    overflow-y: scroll;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.search input{
+    color:  black;/*layout*/
+    background-color: white;
+    font-size: 1.2rem;
+    height: 10%;
+    margin: 1.2%;
+    width: 200%;
 }
