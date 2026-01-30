@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
+<<<<<<< HEAD
 import { Input, Button, CloseButton} from '@chakra-ui/react'
+=======
+>>>>>>> main
 import EventModal from "./EventModal"
 import {useDisclosure} from '@chakra-ui/react'
 
@@ -31,8 +34,13 @@ function SearchBar({placeholder, data}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [eventTitle, setEventTitle,] = useState("")
     const [eventStartDate, setEventStartDate] = useState("")
+<<<<<<< HEAD
     const [eventID, setEventID] = useState("1")
     const [eventDescription, setEventDescription] = useState("")
+=======
+    const [eventDescription, setEventDescription] = useState("")
+    const [eventID, setEventID] = useState()
+>>>>>>> main
     const [eventClassName, setEventClassName] = useState("")
     const [eventEndDate, setEventEndDate] = useState("")
     const [eventSedes, setEventSedes] = useState([])
@@ -114,7 +122,11 @@ function SearchBar({placeholder, data}) {
                 return(
                     <div key={key}>
                         <ul className="dataItem" onClick={() => {handleOpen(value)}}>
+<<<<<<< HEAD
                             <p>{value.title}</p>
+=======
+                            <p>{value.title + " (" + value.sem + ")"}</p>
+>>>>>>> main
                         </ul>
                     
                 </div>
@@ -133,7 +145,12 @@ function SearchBar({placeholder, data}) {
           eventClassName = {eventClassName}
           eventEndDate = {eventEndDate}
           eventSedes = {eventSedes}
+<<<<<<< HEAD
           eventID ={ eventID}  
+=======
+          eventComentarios = {[]}
+          eventID = {eventID}
+>>>>>>> main
         />) : null}
     </div>   
     );

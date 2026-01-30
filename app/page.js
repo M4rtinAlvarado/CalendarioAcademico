@@ -3,9 +3,7 @@ import FullCalendar from "@fullcalendar/react"
 import multiMonthPlugin from "@fullcalendar/multimonth"
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { allCampus, typeEvents, events } from '@/app/api/eventos'
-import {
-  useDisclosure,
-} from '@chakra-ui/react'
+import {useDisclosure} from '@chakra-ui/react'
 import { useEffect, useState } from "react"
 import Boton from "@/app/components/Boton";
 import EventModal from "@/app/components/EventModal";
@@ -21,10 +19,11 @@ function buildToolbar() {
   }
 }
 
+
 function buildValidRange() {
   return {
     start: '2023-01-01',
-    end: '2024-01-01'
+    end: '2025-01-01'
   }
 }
 
@@ -56,15 +55,29 @@ export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [eventTitle, setEventTitle,] = useState("")
   const [eventStartDate, setEventStartDate] = useState("")
-  const [eventEndDate, setEventEndDate] = useState("")
   const [eventDescription, setEventDescription] = useState("")
   const [eventClassName, setEventClassName] = useState("")
-  const [eventID, setEventID] = useState("1")
-  const [eventSedes, setEventSedes] = useState([]) 
+  const [eventEndDate, setEventEndDate] = useState("")
+  const [eventID, setEventID] = useState()
+  const [eventSedes, setEventSedes] = useState([])
   const [selectedFilters, setSelectedFilters] = useState(typeEvents)
   const [estado, setEstado] = useState(buildEstados(typeEvents.concat(allCampus)))
-  const [eventsArray, seteventsArray] = useState(events)
+  const [eventsArray, setEventsArray] = useState(events)
 
+  function limpiarTodos(){
+    setSelectedFilters([])
+    for(let i = 0; i < estado.length; i++){
+      estado[i][1] = true
+    }
+    setEstado(estado)
+
+  }
+
+  function mostrarTodos(){
+    setSelectedFilters(typeEvents)
+    setEstado(buildEstados(typeEvents.concat(allCampus)))
+  }
+  
   
   const filterClickFunction = (selectedCategory) => {
 
@@ -113,7 +126,7 @@ export default function Home() {
             }
           }
         }
-        seteventsArray(items)
+        setEventsArray(items)
   
       } else if (type.length > 0 && campus.length === 0) {
         for (let i = 0; i < type.length; i++) {
@@ -123,42 +136,36 @@ export default function Home() {
             }
           }
         }
-        seteventsArray(items)
+        setEventsArray(items)
       }
-      else if (campus.length > 0 && type.length === 0) {
-        for (let l = 0; l < campus.length; l++) {
-          for (let p = 0; p < events.length; p++) {
-            if (events[p].sede.includes(campus[l]) && !(items.includes(events[p]))) {
-              items.push(events[p])
-            }
-          }
-        }
-        seteventsArray(items)
-      }
+
       else{
-        seteventsArray([])
+        setEventsArray([])
       }
     }
 
   return (
-    <>
+    <div className="main">
     <header>
           <div className="title">
-            <a href="" ><h1 >CALENDARIO UACH</h1></a>
+            <a href="">CALENDARIO UACH</a>
           </div>
           
           <SearchBar placeholder={"Buscar"} data = {events}/>
         </header>
     <div className="main-home">
       <div className="contenedor-filtros">
-        <h1 className="title-filtros">Filtros</h1>
+        <div className="div-filtros">
+          <h1 className="title-filtros">Filtros</h1>
+          <div className="mostrar-button"><u onClick={() => {mostrarTodos()}}>Mostrar Todos</u></div>
+        </div>
         {typeEvents.map((category, index) => (
-          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index} />
+          <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index}/>
           ))}
         {allCampus.map((category, index) => (
           <Boton clase ={category} state = {estado[estadosIndex(category, estado)][1]} click = {() => filterClickFunction(category)} key = {index}/>
           ))}
-        
+        <div className="limpiar-button"><u onClick={() => {limpiarTodos()}}>Limpiar filtros</u></div>
       </div>
       <div className="contenedor-calendario">
       
@@ -201,11 +208,13 @@ export default function Home() {
           eventClassName = {eventClassName}
           eventEndDate = {eventEndDate}
           eventSedes = {eventSedes}
+          eventComentarios = {[]}
           eventID = {eventID}
         />) : null
         }
       </div>
 
+    </div>
     </div>
     </>)
 }

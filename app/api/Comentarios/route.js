@@ -6,7 +6,6 @@ const API_URL = "https://info104-2023-2-db.onrender.com";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  console.log(searchParams);
   const idApp = searchParams.get("idApp");
   const idItem = searchParams.get("idItem");
 
@@ -18,6 +17,5 @@ export async function GET(request) {
   );
 
   const data = await response.json();
-  console.log(data)
   return NextResponse.json(data);
 }
