@@ -145,6 +145,7 @@ export default function Home() {
     }
 
   return (
+    <>
     <div className="main">
     <header>
           <div className="title">
